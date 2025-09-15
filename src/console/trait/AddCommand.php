@@ -22,14 +22,14 @@ trait AddCommand {
         $list = [];
         $port = rand(1, 3) . rand(2, 9) . rand(001, 999);
         $app_key = md5($this->plugin . time() . $port);
-        $pathList = ["api", "app", "config", "console"];
+        $pathList = ["call", "app", "config", "console"];
         foreach ($pathList as $path) {
             $path = base_path("plugin/$this->plugin/$path");
             BotWay::mkDir($path);
         }
-        $api = glob(__DIR__ . "/../../../demo/api/**");
+        $api = glob(__DIR__ . "/../../../demo/call/**");
         foreach ($api as $files) {
-            $list["plugin/$this->plugin/api/" . basename($files)] = $this->savePluginFile('api', $files);
+            $list["plugin/$this->plugin/call/" . basename($files)] = $this->savePluginFile('api', $files);
         }
         $app = glob(__DIR__ . "/../../../demo/app/**");
         foreach ($app as $files) {

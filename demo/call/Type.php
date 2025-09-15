@@ -2,13 +2,13 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 通过$this->token返回允许获取的信息类型
  * @return array
  */
-class Type extends BotApi {
+class Type extends BotCall {
     /**
      * @return array
      */

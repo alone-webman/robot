@@ -2,12 +2,12 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 通过$this->token返回机器人命令列表
  */
-class Command extends BotApi {
+class Command extends BotCall {
     /**
      * ["命令标识"=>"命令名称"]
      * @return array

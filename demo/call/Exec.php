@@ -2,13 +2,13 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 use AloneWebMan\RoBot\BotRequest;
 
 /**
  * 正在处理的信息
  */
-class Exec extends BotApi {
+class Exec extends BotCall {
     /**
      * @param array      $post 请求post
      * @param BotRequest $req  处理后的请求对像

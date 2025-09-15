@@ -64,7 +64,7 @@ trait SetCommand {
      * @return void
      */
     protected function botTable(): void {
-        $this->botArray = $this->callApi("Bot");
+        $this->botArray = $this->callExec("Bot");
         if (count($this->botArray) == 0) {
             $this->plugin = null;
             $this->set("$this->plugin 插件没有机器人列表没有数据");

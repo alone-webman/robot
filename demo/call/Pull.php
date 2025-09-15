@@ -2,12 +2,12 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 主动拉取回调
  */
-class Pull extends BotApi {
+class Pull extends BotCall {
     /**
      * @param mixed $status 状态
      * @param array $result 主体信息

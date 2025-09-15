@@ -27,7 +27,7 @@ class BotRoute {
         $router = trim(str_replace('\\', '/', $app_router), '/');
         Route::post('/' . $router . '[/{token}]', function(Request $req, mixed $token = '') use ($plugin, $config) {
             $post = $req->post();
-            $res = BotFacade::callApi($plugin, "Route", $token, $post);
+            $res = BotFacade::callExec($plugin, "Route", $token, $post);
             if (!empty($res)) {
                 return $res;
             }
@@ -57,7 +57,7 @@ class BotRoute {
      * @return void
      */
     public static function routeHandle(string $plugin, string $token, array $post): void {
-        $mode = (int) BotFacade::callApi($plugin, "Mode", $token);
+        $mode = (int) BotFacade::callExec($plugin, "Mode", $token);
         switch ($mode) {
             case 1:
                 // 实时
@@ -135,29 +135,29 @@ class BotRoute {
      */
     public static function exec(string $plugin, string $token, array $post): void {
         try {
-            $type = BotFacade::callApi($plugin, "Type", $token);
+            $type = BotFacade::callExec($plugin, "Type", $token);
             $req = new BotRequest($post, $type['msgType'] ?? [], $type['msgClass'] ?? []);
             $req->handle();
-            BotFacade::callApi($plugin, "Exec", $token, $post, $req);
+            BotFacade::callExec($plugin, "Exec", $token, $post, $req);
             if (!empty($req->allow)) {
                 switch ($req->chat_type) {
                     case 'bot':
                         // 机器人信息
                         $app = BotFacade::callApp($plugin, "Bot", "handleMessage", $token, $req);
                         // 执行完成回调
-                        BotFacade::callApi($plugin, "End", $token, "Bot", $post, $app);
+                        BotFacade::callExec($plugin, "End", $token, "Bot", $post, $app);
                         break;
                     case 'group':
                         // 群组信息
                         $app = BotFacade::callApp($plugin, "Group", "handleMessage", $token, $req);
                         // 执行完成回调
-                        BotFacade::callApi($plugin, "End", $token, "Group", $post, $app);
+                        BotFacade::callExec($plugin, "End", $token, "Group", $post, $app);
                         break;
                     case 'channel':
                         // 频道信息
                         $app = BotFacade::callApp($plugin, "Channel", "handleMessage", $token, $req);
                         // 执行完成回调
-                        BotFacade::callApi($plugin, "End", $token, "Group", $post, $app);
+                        BotFacade::callExec($plugin, "End", $token, "Group", $post, $app);
                         break;
                 }
             }
@@ -169,7 +169,7 @@ class BotRoute {
                 'line' => $exception->getLine(),
                 'date' => date('Y-m-d H:i:s')
             ];
-            BotFacade::callApi($plugin, "Error", $token, $post, $exception, $array);
+            BotFacade::callExec($plugin, "Error", $token, $post, $exception, $array);
         }
     }
 }

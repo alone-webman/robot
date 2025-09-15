@@ -120,8 +120,8 @@ class CommandHelper {
      * @param        ...$parameter
      * @return mixed
      */
-    public function callApi(string $file, ...$parameter): mixed {
-        return BotFacade::callApi($this->plugin, $file, $this->token, ...$parameter);
+    public function callExec(string $file, ...$parameter): mixed {
+        return BotFacade::callExec($this->plugin, $file, $this->token, ...$parameter);
     }
 
     /**
@@ -217,7 +217,7 @@ class CommandHelper {
      * @return array
      */
     public function allowedUpdate(): array {
-        $arr = $this->callApi("Type");
+        $arr = $this->callExec("Type");
         $allowed = [];
         $msgType = $arr["msgType"] ?? "";
         foreach ($msgType as $k => $v) {

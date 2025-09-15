@@ -2,12 +2,12 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 返回机器人列表(二维数组)
  */
-class Bot extends BotApi {
+class Bot extends BotCall {
     /**
      * @return array 二维数组
      * @property bool   $pull    true=主动拉取,false=网页接收

@@ -4,7 +4,7 @@ namespace AloneWebMan\RoBot;
 /**
  * api目录使用
  */
-abstract class BotApi {
+abstract class BotCall {
     // 当前插件名
     public string $plugin = "";
     // 路由token

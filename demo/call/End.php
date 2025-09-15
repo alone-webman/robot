@@ -5,12 +5,12 @@ namespace Telegram\Bot\Demo\call;
 use Telegram\Bot\Demo\app\Bot;
 use Telegram\Bot\Demo\app\Group;
 use Telegram\Bot\Demo\app\Channel;
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 程序执行结束时回凋
  */
-class End extends BotApi {
+class End extends BotCall {
     /**
      * @param string            $type 类型 Bot|Group|Channel
      * @param array             $post 请求post

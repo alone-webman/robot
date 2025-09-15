@@ -60,7 +60,7 @@ class BotFacade {
      * @param        ...$parameter
      * @return mixed
      */
-    public static function callApi(string $plugin, string $file, string $routeToken = "", ...$parameter): mixed {
+    public static function callExec(string $plugin, string $file, string $routeToken = "", ...$parameter): mixed {
         $className = "\\plugin\\{$plugin}\\call\\" . ucfirst($file);
         return call_user_func_array([new $className($plugin, $routeToken), "main"], $parameter);
     }

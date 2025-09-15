@@ -22,7 +22,7 @@ class BotProcess {
         $process = [];
         $config = BotFacade::config($plugin);
         if ($config['pull_status']) {
-            $items = (array) BotFacade::callApi($plugin, 'Bot');
+            $items = (array) BotFacade::callExec($plugin, 'Bot');
             $pull_count = $config['pull_count'] ?? 0;
             $count = $pull_count > 0 ? $pull_count : (count($items) + 8);
             if ($count > 0) {
@@ -99,13 +99,13 @@ class BotProcess {
      * @return array
      */
     public static function setBotCache(string $plugin, string $file, string $pull_key, bool $start): array {
-        $items = (array) BotFacade::callApi($plugin, "Bot");
+        $items = (array) BotFacade::callExec($plugin, "Bot");
         $config = BotFacade::config($plugin);
         $save = [];
         foreach ($items as $item) {
             // $bot = alone_bot($item['key']);
             $token = BotWay::getBotRouteToken($item['key'], $config['app_key']);
-            $type = BotFacade::callApi($plugin, "Type", $token);
+            $type = BotFacade::callExec($plugin, "Type", $token);
             $msgType = array_merge([
                 //普通消息
                 'message'              => true,

@@ -2,12 +2,12 @@
 
 namespace Telegram\Bot\Demo\call;
 
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 通过$this->token返回机器人按钮信息
  */
-class Button extends BotApi {
+class Button extends BotCall {
     /**
      * @return array
      * @property bool   $name    按钮名称

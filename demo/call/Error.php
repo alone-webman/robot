@@ -4,12 +4,12 @@ namespace Telegram\Bot\Demo\call;
 
 use Exception;
 use Throwable;
-use AloneWebMan\RoBot\BotApi;
+use AloneWebMan\RoBot\BotCall;
 
 /**
  * 程序致命错误时回调
  */
-class Error extends BotApi {
+class Error extends BotCall {
     /**
      * @param array               $post  请求post
      * @param Exception|Throwable $error 错误对像

@@ -29,7 +29,7 @@ trait AddCommand {
         }
         $api = glob(__DIR__ . "/../../../demo/call/**");
         foreach ($api as $files) {
-            $list["plugin/$this->plugin/call/" . basename($files)] = $this->savePluginFile('api', $files);
+            $list["plugin/$this->plugin/call/" . basename($files)] = $this->savePluginFile('call', $files);
         }
         $app = glob(__DIR__ . "/../../../demo/app/**");
         foreach ($app as $files) {

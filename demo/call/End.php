@@ -1,6 +1,6 @@
 <?php
 
-namespace Telegram\Bot\Demo\api;
+namespace Telegram\Bot\Demo\call;
 
 use Telegram\Bot\Demo\app\Bot;
 use Telegram\Bot\Demo\app\Group;

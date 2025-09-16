@@ -11,15 +11,15 @@ class BotConsole {
     // 当前插件名
     public string $plugin = "";
     // 路由token
-    public string $token = "";
+    public string|null $token = "";
     // 路由token
     public CommandHelper|null $command = null;
 
     /**
-     * @param string $plugin 插件名
-     * @param string $token  路由token
+     * @param string      $plugin 插件名
+     * @param string|null $token  路由token
      */
-    public function __construct(string $plugin, string $token = "", CommandHelper|null $command = null) {
+    public function __construct(string $plugin, string|null $token = "", CommandHelper|null $command = null) {
         $this->plugin = $plugin;
         $this->token = $token;
         $this->command = $command;

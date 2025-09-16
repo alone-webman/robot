@@ -1,16 +1,16 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
 use Telegram\Bot\Demo\app\Bot;
 use Telegram\Bot\Demo\app\Group;
 use Telegram\Bot\Demo\app\Channel;
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 程序执行结束时回凋
  */
-class End extends BotCall {
+class End extends BotTask {
     /**
      * @param string            $type 类型 Bot|Group|Channel
      * @param array             $post 请求post

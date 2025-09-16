@@ -4,17 +4,17 @@ namespace AloneWebMan\RoBot;
 /**
  * api目录使用
  */
-abstract class BotCall {
+abstract class BotTask {
     // 当前插件名
     public string $plugin = "";
     // 路由token
     public string $token = "";
 
     /**
-     * @param string $plugin 插件名
-     * @param string $token  路由token
+     * @param string      $plugin 插件名
+     * @param string|null $token  路由token
      */
-    public function __construct(string $plugin, string $token = "") {
+    public function __construct(string $plugin, string|null $token = "") {
         $this->plugin = $plugin;
         $this->token = $token;
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 通过$this->token返回机器人按钮信息
  */
-class Button extends BotCall {
+class Button extends BotTask {
     /**
      * @return array
      * @property bool   $name    按钮名称

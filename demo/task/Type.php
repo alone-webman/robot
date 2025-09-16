@@ -1,14 +1,14 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 通过$this->token返回允许获取的信息类型
  * @return array
  */
-class Type extends BotCall {
+class Type extends BotTask {
     /**
      * @return array
      */

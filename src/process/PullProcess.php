@@ -73,7 +73,7 @@ class PullProcess {
                         $array = $bot->array();
                         $ok = ($array['ok'] ?? '');
                         $result = $array['result'] ?? [];
-                        BotFacade::callDeploy($plugin, "Pull", $item['token'], $ok, $result, $array);
+                        BotFacade::callTask($plugin, "Pull", $item['token'], $ok, $result, $array);
                         if (!empty($ok) && !empty($result)) {
                             $update_ids = array_column($result, 'update_id');
                             $update_id = (int) (max($update_ids) ?: 0);

@@ -23,7 +23,7 @@ class BotProcess {
             'handler'     => \app\process\Monitor::class,
             'reloadable'  => false,
             'constructor' => [
-                'monitorDir'        => [base_path("/plugin/$plugin/deploy")],
+                'monitorDir'        => [base_path("/plugin/$plugin/task")],
                 'monitorExtensions' => ['php'],
                 'options'           => [
                     'enable_file_monitor'   => DIRECTORY_SEPARATOR === '/',
@@ -33,7 +33,7 @@ class BotProcess {
         ];
         $config = BotFacade::config($plugin);
         if ($config['pull_status']) {
-            $items = (array) BotFacade::callDeploy($plugin, 'Bot');
+            $items = (array) BotFacade::callTask($plugin, 'Bot');
             $pull_count = $config['pull_count'] ?? 0;
             $count = $pull_count > 0 ? $pull_count : (count($items) + 8);
             if ($count > 0) {
@@ -110,13 +110,13 @@ class BotProcess {
      * @return array
      */
     public static function setBotCache(string $plugin, string $file, string $pull_key, bool $start): array {
-        $items = (array) BotFacade::callDeploy($plugin, "Bot");
+        $items = (array) BotFacade::callTask($plugin, "Bot");
         $config = BotFacade::config($plugin);
         $save = [];
         foreach ($items as $item) {
             // $bot = alone_bot($item['key']);
             $token = BotWay::getBotRouteToken($item['key'], $config['app_key']);
-            $type = BotFacade::callDeploy($plugin, "Type", $token);
+            $type = BotFacade::callTask($plugin, "Type", $token);
             $msgType = array_merge([
                 //普通消息
                 'message'              => true,

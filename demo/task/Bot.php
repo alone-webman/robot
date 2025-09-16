@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 返回机器人列表(二维数组)
  */
-class Bot extends BotCall {
+class Bot extends BotTask {
     /**
      * @return array 二维数组
      * @property bool   $pull    true=主动拉取,false=网页接收

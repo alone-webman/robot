@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 主动拉取回调
  */
-class Pull extends BotCall {
+class Pull extends BotTask {
     /**
      * @param mixed $status 状态
      * @param array $result 主体信息

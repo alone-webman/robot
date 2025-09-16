@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 通过$this->token返回机器人key
  */
-class Key extends BotCall {
+class Key extends BotTask {
     /**
      * @return string
      */

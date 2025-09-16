@@ -96,6 +96,9 @@ class CommandHelper {
                 // 插件列表
                 $this->list();
                 break;
+            case "dev":
+                $this->callConsole("Debug");
+                break;
             case "help":
             default:
                 // 命令帮助
@@ -121,7 +124,7 @@ class CommandHelper {
      * @return mixed
      */
     public function callDeploy(string $file, ...$parameter): mixed {
-        return BotFacade::callDeploy($this->plugin, $file, $this->token, ...$parameter);
+        return BotFacade::callTask($this->plugin, $file, $this->token, ...$parameter);
     }
 
     /**

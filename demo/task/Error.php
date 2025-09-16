@@ -1,15 +1,15 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
 use Exception;
 use Throwable;
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 程序致命错误时回调
  */
-class Error extends BotCall {
+class Error extends BotTask {
     /**
      * @param array               $post  请求post
      * @param Exception|Throwable $error 错误对像

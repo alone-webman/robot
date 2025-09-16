@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 通过$this->token返回机器人处理方式
  */
-class Mode extends BotCall {
+class Mode extends BotTask {
     /**
      * 1=实时,2=协程,3=队列,4=异步
      * @return int

@@ -33,10 +33,10 @@ abstract class BotApp {
     abstract public function start(): static;
 
     /**
-     * @param string $plugin 插件名
-     * @param string $token  路由token
+     * @param string      $plugin 插件名
+     * @param string|null $token  路由token
      */
-    public function __construct(string $plugin, string $token = "") {
+    public function __construct(string $plugin, string|null $token = "") {
         $this->plugin = $plugin;
         $this->token = $token;
     }
@@ -62,9 +62,9 @@ abstract class BotApp {
         $this->post = $this->req->post ?? [];
         $this->data = $this->req->data ?? [];
         $this->update_id = $this->req->update_id ?? '';
-        $this->key = BotFacade::callDeploy($this->plugin, "Key", $this->token);
+        $this->key = BotFacade::callTask($this->plugin, "Key", $this->token);
         if (empty($this->key)) {
-            throw new Exception("plugin/{$this->plugin}/deploy/Key.php --- Cannot be empty");
+            throw new Exception("plugin/{$this->plugin}/task/Key.php --- Cannot be empty");
         }
         $this->res = $this->chat();
         call_user_func([$this, 'start']);

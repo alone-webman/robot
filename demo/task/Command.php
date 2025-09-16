@@ -1,13 +1,13 @@
 <?php
 
-namespace Telegram\Bot\Demo\deploy;
+namespace Telegram\Bot\Demo\task;
 
-use AloneWebMan\RoBot\BotCall;
+use AloneWebMan\RoBot\BotTask;
 
 /**
  * 通过$this->token返回机器人命令列表
  */
-class Command extends BotCall {
+class Command extends BotTask {
     /**
      * ["命令标识"=>"命令名称"]
      * @return array

@@ -14,7 +14,7 @@ trait HelpCommand {
                 ["php webman alone:bot list", "查看插件列表信息"],
                 ["php webman alone:bot add [插件名称]", "生成插件目录代码 /plugin/插件名称"],
                 ["php webman alone:bot set [插件名称]", "设置机器人命令列表"],
-                ["php webman alone:bot dev", "调试开发"]
+                ["php webman alone:bot dev [插件名称]", "调试开发"]
             ]
         );
     }

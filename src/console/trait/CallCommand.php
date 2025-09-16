@@ -156,7 +156,7 @@ trait CallCommand {
      * @return array
      */
     protected function CommandShow(): array {
-        $command = $this->callExec('Command');
+        $command = $this->callDeploy('Command');
         $array = [];
         foreach ($command as $k => $v) {
             $array[] = [$k, $v];
@@ -170,7 +170,7 @@ trait CallCommand {
      * @return array
      */
     protected function CommandSet(): array {
-        $command = $this->callExec('Command');
+        $command = $this->callDeploy('Command');
         $res = $this->res()->setMyCommands($command);
         $array = [];
         foreach ($command as $k => $v) {
@@ -186,7 +186,7 @@ trait CallCommand {
      * @return array
      */
     protected function CommandDel(): array {
-        $command = $this->callExec('Command');
+        $command = $this->callDeploy('Command');
         $res = $this->res()->setMyCommands();
         $array = [];
         foreach ($command as $k => $v) {
@@ -202,7 +202,7 @@ trait CallCommand {
      * @return array
      */
     protected function ButtonShow(): array {
-        $button = $this->callExec('Button');
+        $button = $this->callDeploy('Button');
         $this->table("查看按钮信息", ["名称", "类型", "连接"], [[$button['name'], ($button['type'] ?? 'web_app') ?: "web_app", $button['url']]]);
         return [$button];
     }
@@ -212,7 +212,7 @@ trait CallCommand {
      * @return array
      */
     protected function ButtonSet(): array {
-        $button = $this->callExec('Button');
+        $button = $this->callDeploy('Button');
         $res = $this->res()->setChatMenuButton(($button['type'] ?? 'web_app') ?: "web_app", $button['name'], $button['url']);
         $array[] = [$button['name'], ($button['type'] ?? 'web_app') ?: "web_app", $button['url']];
         $array[] = [Cmd::style(!empty($res->array('ok')) ? "成功" : "失败", 3)];
@@ -225,7 +225,7 @@ trait CallCommand {
      * @return array
      */
     protected function ButtonDel(): array {
-        $button = $this->callExec('Button');
+        $button = $this->callDeploy('Button');
         $res = $this->res()->setChatMenuButton("commands");
         $array[] = [$button['name'], ($button['type'] ?? 'web_app') ?: "web_app", $button['url']];
         $array[] = [Cmd::style(!empty($res->array('ok')) ? "成功" : "失败", 3)];

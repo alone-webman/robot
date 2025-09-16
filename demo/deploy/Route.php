@@ -1,6 +1,6 @@
 <?php
 
-namespace Telegram\Bot\Demo\call;
+namespace Telegram\Bot\Demo\deploy;
 
 use support\Response;
 use AloneWebMan\RoBot\BotCall;

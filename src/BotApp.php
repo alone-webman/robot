@@ -62,7 +62,7 @@ abstract class BotApp {
         $this->post = $this->req->post ?? [];
         $this->data = $this->req->data ?? [];
         $this->update_id = $this->req->update_id ?? '';
-        $this->key = BotFacade::callExec($this->plugin, "Key", $this->token);
+        $this->key = BotFacade::callDeploy($this->plugin, "Key", $this->token);
         if (empty($this->key)) {
             throw new Exception("plugin/{$this->plugin}/api/Key.php --- Cannot be empty");
         }

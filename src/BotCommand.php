@@ -32,7 +32,7 @@ class BotCommand {
                 $array = [
                     'number' => $j,
                     'plugin' => $plugin,
-                    'count'  => count(BotFacade::callExec($plugin, "Bot")),
+                    'count'  => count(BotFacade::callDeploy($plugin, "Bot")),
                     'router' => $config["app_router"] ?: "null",
                     'domain' => $config["app_domain"] ?: "null",
                     'key'    => $config["app_key"] ?: "null",

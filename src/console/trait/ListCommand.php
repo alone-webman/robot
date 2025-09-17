@@ -14,6 +14,7 @@ trait ListCommand {
         if (is_array($res)) {
             $this->table("插件列表", $res['head'], $res['table']);
         } else {
+            $this->help();
             $this->showRed($res);
         }
     }

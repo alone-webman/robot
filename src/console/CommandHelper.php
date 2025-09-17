@@ -119,6 +119,7 @@ EOF;
                 $this->add();
                 break;
             case "set":
+                // 设置插件
                 $this->set();
                 break;
             case "list":
@@ -129,9 +130,12 @@ EOF;
                 $this->dev();
                 break;
             case "help":
-            default:
                 // 命令帮助
                 $this->help();
+                break;
+            default:
+                // 命令帮助
+                $this->set();
                 break;
         }
     }

@@ -12,6 +12,7 @@ trait DevCommand {
         if (empty($this->plugin)) {
             $res = BotCommand::botList();
             if (is_string($res)) {
+                $this->help();
                 $this->showRed($res);
                 return;
             }

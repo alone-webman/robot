@@ -19,6 +19,7 @@ trait SetCommand {
         if (empty($this->plugin)) {
             $res = BotCommand::botList();
             if (is_string($res)) {
+                $this->help();
                 $this->showRed($res);
                 return;
             }
@@ -47,7 +48,7 @@ trait SetCommand {
             $this->showRed("请输入插件名称 alone:bot set [插件名称]");
             return;
         }
-        $file = run_path("plugin/$this->plugin/api/Bot.php");
+        $file = run_path("plugin/$this->plugin/config/telegram.php");
         if (empty(is_file($file))) {
             $this->list($res ?? BotCommand::botList());
             $this->showRed("$this->plugin 插件名称不正确");

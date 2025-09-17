@@ -1,6 +1,6 @@
 <?php
 
-namespace Telegram\Bot\Demo\task;
+namespace Telegram\Bot\Demo\api;
 
 use Exception;
 use Throwable;

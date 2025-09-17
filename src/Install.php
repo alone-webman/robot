@@ -41,6 +41,12 @@ class Install {
                 }
             }
             copy_dir(__DIR__ . "/../$source", base_path($dest));
+            copy(__DIR__ . "/../bin/robot", base_path("bot"));
+            $content = <<<EOF
+<?php
+require_once __DIR__ . '/vendor/alone-webman/robot/bin/robot';
+EOF;
+            @file_put_contents(base_path("robot"), $content);
             echo "Create $dest";
         }
     }

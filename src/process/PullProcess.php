@@ -46,34 +46,11 @@ class PullProcess {
                         $update_id_file = run_path('runtime/alone_bot/' . $plugin . '_' . $item['token'] . '_update_id.cache');
                         $update_id = BotProcess::getBotUpdateId($plugin, $item['token'], $update_id_file, $pull_key);
                         $bot = alone_bot($item['key']);
-                        $bot->getUpdates($update_id, 100, 0, $item["updates"] ?? [
-                            //普通消息
-                            'message',
-                            //回调查询（来自按钮点击）
-                            'callback_query',
-                            //匿名投票,接收投票详细
-                            'poll',
-                            //实名投票 那个用户投了那个票
-                            'poll_answer',
-                            //频道消息
-                            'channel_post',
-                            //编辑过的普通消息
-                            'edited_message',
-                            //编辑过的频道消息
-                            'edited_channel_post',
-                            //内联查询
-                            'inline_query',
-                            //选择的内联结果
-                            'chosen_inline_result',
-                            //运输查询（用于购物）
-                            'shipping_query',
-                            //预检查查询（用于购物）
-                            'pre_checkout_query'
-                        ]);
+                        $bot->getUpdates($update_id, 100, 0, $item["updates"]);
                         $array = $bot->array();
                         $ok = ($array['ok'] ?? '');
                         $result = $array['result'] ?? [];
-                        BotFacade::callTask($plugin, "Pull", $item['token'], $ok, $result, $array);
+                        BotFacade::callApi($plugin, "Pull", $item['token'], $ok, $result, $array);
                         if (!empty($ok) && !empty($result)) {
                             $update_ids = array_column($result, 'update_id');
                             $update_id = (int) (max($update_ids) ?: 0);

@@ -19,11 +19,12 @@ class BotProcess {
      * @return array
      */
     public static function start(string $plugin): array {
+        /*
         $process['monitor'] = [
             'handler'     => \app\process\Monitor::class,
             'reloadable'  => false,
             'constructor' => [
-                'monitorDir'        => [base_path("/plugin/$plugin/task")],
+                'monitorDir'        => [base_path("/plugin/$plugin/api")],
                 'monitorExtensions' => ['php'],
                 'options'           => [
                     'enable_file_monitor'   => DIRECTORY_SEPARATOR === '/',
@@ -31,18 +32,18 @@ class BotProcess {
                 ]
             ]
         ];
+        */
+        $process = [];
         $config = BotFacade::config($plugin);
         if ($config['pull_status']) {
-            $items = (array) BotFacade::callTask($plugin, 'Bot');
             $pull_count = $config['pull_count'] ?? 0;
-            $count = $pull_count > 0 ? $pull_count : (count($items) + 8);
-            if ($count > 0) {
+            if ($pull_count > 0) {
                 $pull_handler = $config["pull_handler"] ?? null;
                 $process['pull'] = [
                     "name"      => $plugin,
                     'eventLoop' => Fiber::class,
                     'handler'   => !empty($pull_handler) ? $pull_handler : PullProcess::class,
-                    'count'     => $count
+                    'count'     => $pull_count
                 ];
             }
         }
@@ -106,17 +107,16 @@ class BotProcess {
      * @param string $plugin
      * @param string $file
      * @param string $pull_key
-     * @param bool   $start
+     * @param bool   $start 是否刚启动
      * @return array
      */
-    public static function setBotCache(string $plugin, string $file, string $pull_key, bool $start): array {
-        $items = (array) BotFacade::callTask($plugin, "Bot");
+    public static function setBotCache(string $plugin, string $file, string $pull_key, bool $start = false): array {
+        $items = (array) BotFacade::callBotList($plugin);
         $config = BotFacade::config($plugin);
         $save = [];
         foreach ($items as $item) {
-            // $bot = alone_bot($item['key']);
             $token = BotWay::getBotRouteToken($item['key'], $config['app_key']);
-            $type = BotFacade::callTask($plugin, "Type", $token);
+            $type = BotFacade::callApi($plugin, "Type", $token);
             $msgType = array_merge([
                 //普通消息
                 'message'              => true,
@@ -149,9 +149,31 @@ class BotProcess {
                     $updates[] = $k;
                 }
             }
+            $updates = !empty($updates) ? $updates : [
+                //普通消息
+                'message',
+                //回调查询（来自按钮点击）
+                'callback_query',
+                //匿名投票,接收投票详细
+                'poll',
+                //实名投票 那个用户投了那个票
+                'poll_answer',
+                //频道消息
+                'channel_post',
+                //编辑过的普通消息
+                'edited_message',
+                //编辑过的频道消息
+                'edited_channel_post',
+                //内联查询
+                'inline_query',
+                //选择的内联结果
+                'chosen_inline_result',
+                //运输查询（用于购物）
+                'shipping_query',
+                //预检查查询（用于购物）
+                'pre_checkout_query'
+            ];
             if (!empty($item['pull'] ?? null)) {
-                // 第一次启动时删除更新
-                //(!empty($start)) && $bot->deleteWebhook(true);
                 $save[] = array_merge(["token" => $token, "updates" => $updates], $item);
             }
         }

@@ -71,6 +71,15 @@ class CommandHelper {
     ];
 
     /**
+     * @return void
+     */
+    public static function run(): void {
+        global $argv;
+        $command = new CommandHelper($argv[1] ?? 'help', $argv[2] ?? '');
+        $command->start();
+    }
+
+    /**
      * @param string|null $type   处理类型
      * @param string|null $plugin 插件名称
      */
@@ -123,8 +132,16 @@ class CommandHelper {
      * @param        ...$parameter
      * @return mixed
      */
-    public function callDeploy(string $file, ...$parameter): mixed {
-        return BotFacade::callTask($this->plugin, $file, $this->token, ...$parameter);
+    public function callApi(string $file, ...$parameter): mixed {
+        return BotFacade::callApi($this->plugin, $file, $this->token, ...$parameter);
+    }
+
+    /**
+     * 机器人列表
+     * @return mixed
+     */
+    public function callBotList(): mixed {
+        return BotFacade::callBotList($this->plugin);
     }
 
     /**
@@ -220,7 +237,7 @@ class CommandHelper {
      * @return array
      */
     public function allowedUpdate(): array {
-        $arr = $this->callDeploy("Type");
+        $arr = $this->callApi("Type");
         $allowed = [];
         $msgType = $arr["msgType"] ?? "";
         foreach ($msgType as $k => $v) {

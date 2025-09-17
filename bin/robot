@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use AloneWebMan\RoBot\console\CommandHelper;
+
+function autoLoaderPhpFile($file, int $max = 5): void {
+    for ($level = 0; $level <= $max; $level++) {
+        $path = __DIR__ . str_repeat('/..', $level) . "/" . trim($file, '/');
+        if (is_file($path)) {
+            require $path;
+            require_once $path;
+            break;
+        }
+    }
+}
+
+autoLoaderPhpFile("vendor/autoload.php");
+autoLoaderPhpFile("support/bootstrap.php");
+CommandHelper::run();

@@ -47,7 +47,7 @@ trait SetCommand {
             $this->showRed("请输入插件名称 alone:bot set [插件名称]");
             return;
         }
-        $file = run_path("plugin/$this->plugin/task/Bot.php");
+        $file = run_path("plugin/$this->plugin/api/Bot.php");
         if (empty(is_file($file))) {
             $this->list($res ?? BotCommand::botList());
             $this->showRed("$this->plugin 插件名称不正确");
@@ -64,7 +64,7 @@ trait SetCommand {
      * @return void
      */
     protected function botTable(): void {
-        $this->botArray = $this->callDeploy("Bot");
+        $this->botArray = $this->callBotList();
         if (count($this->botArray) == 0) {
             $this->plugin = null;
             $this->set("$this->plugin 插件没有机器人列表没有数据");

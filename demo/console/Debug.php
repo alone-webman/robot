@@ -2,7 +2,6 @@
 
 namespace Telegram\Bot\Demo\console;
 
-use AlonePhp\Telegram\Bot;
 use AloneWebMan\RoBot\BotConsole;
 
 /**
@@ -10,10 +9,9 @@ use AloneWebMan\RoBot\BotConsole;
  */
 class Debug extends BotConsole {
     /**
-     * @param Bot $bot
      * @return void
      */
-    public function main(Bot $bot): void {
+    public function main(): void {
         $this->command->showRed("debug");
     }
 }

@@ -42,17 +42,6 @@ abstract class BotApp {
     }
 
     /**
-     * 获取配置
-     * @param string|null $key
-     * @param mixed       $default
-     * @return mixed
-     */
-    public function getConfig(string|null $key = null, mixed $default = null): mixed {
-        return BotFacade::getConfig($this->plugin, $key, $default);
-    }
-
-
-    /**
      * @param BotRequest $req
      * @return $this
      * @throws Exception
@@ -62,13 +51,23 @@ abstract class BotApp {
         $this->post = $this->req->post ?? [];
         $this->data = $this->req->data ?? [];
         $this->update_id = $this->req->update_id ?? '';
-        $this->key = BotFacade::callTask($this->plugin, "Key", $this->token);
+        $this->key = BotFacade::callBotKey($this->plugin, $this->token);
         if (empty($this->key)) {
-            throw new Exception("plugin/{$this->plugin}/task/Key.php --- Cannot be empty");
+            throw new Exception("plugin/{$this->plugin}/api/Key.php --- Cannot be empty");
         }
         $this->res = $this->chat();
         call_user_func([$this, 'start']);
         return $this;
+    }
+
+    /**
+     * 获取配置
+     * @param string|null $key
+     * @param mixed       $default
+     * @return mixed
+     */
+    public function getConfig(string|null $key = null, mixed $default = null): mixed {
+        return BotFacade::getConfig($this->plugin, $key, $default);
     }
 
     /**

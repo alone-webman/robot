@@ -18,7 +18,7 @@ trait getCommand {
      * @return array
      */
     protected function getCommandSet(): array {
-        $command = $this->callDeploy('Command');
+        $command = $this->callApi('Command');
         $array[] = ["<fg=green;blob>标识</fg=green;blob>", "<fg=green;blob>名称</fg=green;blob>"];
         foreach ($command as $key => $value) {
             $array[] = [$key, $value];

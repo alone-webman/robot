@@ -70,12 +70,15 @@ class CommandHelper {
         33 => ["name" => "删除按钮信息", "method" => "ButtonDel", "confirm" => true],
     ];
 
+    protected string $cliFile = "webman alone:bot";
+
     /**
      * @return void
      */
     public static function run(): void {
         global $argv;
         $command = new CommandHelper($argv[1] ?? 'help', $argv[2] ?? '');
+        $command->cliFile = $argv[0] ?? "robot";
         $command->start();
     }
 

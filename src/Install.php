@@ -43,6 +43,7 @@ class Install {
             copy_dir(__DIR__ . "/../$source", base_path($dest));
             copy(__DIR__ . "/../bin/robot", base_path("bot"));
             $content = <<<EOF
+#!/usr/bin/env php
 <?php
 require_once __DIR__ . '/vendor/alone-webman/robot/bin/robot';
 EOF;

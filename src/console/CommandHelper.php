@@ -78,7 +78,7 @@ class CommandHelper {
      */
     public static function run(): void {
         global $argv;
-        $command = new CommandHelper($argv[1] ?? 'help', $argv[2] ?? '');
+        $command = new CommandHelper($argv[1] ?? '', $argv[2] ?? '');
         $command->cliFile = $argv[0] ?? "robot";
         $command->start();
     }

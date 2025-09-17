@@ -21,6 +21,7 @@ class BotPluginCommand extends Command {
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int {
+        CommandHelper::saveRobotFile();
         $type = $input->getArgument("type") ?: "";
         $plugin = $input->getArgument("plugin") ?: "";
         $command = new CommandHelper($type, $plugin);

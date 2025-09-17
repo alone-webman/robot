@@ -80,6 +80,22 @@ class CommandHelper {
     }
 
     /**
+     * @return false|int|void
+     */
+    public static function saveRobotFile() {
+        $file = base_path("robot");
+        if (empty(is_file($file))) {
+
+            $content = <<<EOF
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/vendor/alone-webman/robot/bin/robot';
+EOF;
+            return @file_put_contents(base_path("robot"), $content);
+        }
+    }
+
+    /**
      * @param string|null $type   处理类型
      * @param string|null $plugin 插件名称
      */

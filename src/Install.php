@@ -2,6 +2,8 @@
 
 namespace AloneWebMan\RoBot;
 
+use AloneWebMan\RoBot\console\CommandHelper;
+
 class Install {
     const WEBMAN_PLUGIN = true;
 
@@ -41,13 +43,7 @@ class Install {
                 }
             }
             copy_dir(__DIR__ . "/../$source", base_path($dest));
-            copy(__DIR__ . "/../bin/robot", base_path("bot"));
-            $content = <<<EOF
-#!/usr/bin/env php
-<?php
-require_once __DIR__ . '/vendor/alone-webman/robot/bin/robot';
-EOF;
-            @file_put_contents(base_path("robot"), $content);
+            CommandHelper::saveRobotFile();
             echo "Create $dest";
         }
     }

@@ -13,12 +13,10 @@ trait AddCommand {
             $this->showRed("请输入插件名称");
             return;
         }
-        /*
         if (is_dir(base_path("plugin/$this->plugin"))) {
             $this->showRed("插件目录已存在");
             return;
         }
-        */
         $list = [];
         $port = rand(1, 3) . rand(2, 9) . rand(001, 999);
         $app_key = md5($this->plugin . time() . $port);

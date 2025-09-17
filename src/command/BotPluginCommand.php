@@ -15,7 +15,7 @@ class BotPluginCommand extends Command {
 
     protected function configure(): void {
         // 操作类型
-        $this->addArgument('type', InputArgument::OPTIONAL, "type");
+        $this->addArgument('type', InputArgument::OPTIONAL, "type", "set");
         // 插件名称
         $this->addArgument('plugin', InputArgument::OPTIONAL, "plugin");
     }
@@ -24,7 +24,7 @@ class BotPluginCommand extends Command {
         CommandHelper::saveRobotFile();
         $type = $input->getArgument("type") ?: "";
         $plugin = $input->getArgument("plugin") ?: "";
-        $command = new CommandHelper($type, $plugin);
+        $command = new CommandHelper($type ?: "set", $plugin);
         $command->start();
         return self::SUCCESS;
     }

@@ -78,7 +78,7 @@ class CommandHelper {
      */
     public static function run(): void {
         global $argv;
-        $command = new CommandHelper($argv[1] ?? '', $argv[2] ?? '');
+        $command = new CommandHelper($argv[1] ?? 'set', $argv[2] ?? '');
         $command->cliFile = $argv[0] ?? "robot";
         $command->start();
     }
@@ -118,6 +118,10 @@ EOF;
                 // 添加插件
                 $this->add();
                 break;
+            case "set":
+                // 设置插件
+                $this->set();
+                break;
             case "list":
                 // 插件列表
                 $this->list();
@@ -126,14 +130,9 @@ EOF;
                 $this->dev();
                 break;
             case "help":
+            default:
                 // 命令帮助
                 $this->help();
-                break;
-            case "set":
-            default:
-                // 设置插件
-                $this->set();
-                break;
         }
     }
 

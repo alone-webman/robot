@@ -6,6 +6,7 @@ use AloneWebMan\RoBot\Cmd;
 use AlonePhp\Telegram\Bot;
 use AloneWebMan\RoBot\BotFacade;
 use AloneWebMan\RoBot\BotRequest;
+use AloneWebMan\RoBot\BotCommand;
 use Symfony\Component\Console\Helper\Table;
 use AloneWebMan\RoBot\console\trait\AddCommand;
 use AloneWebMan\RoBot\console\trait\SetCommand;
@@ -125,6 +126,17 @@ EOF;
                 $this->list();
                 break;
             case "dev":
+                if (empty($this->plugin)) {
+                    $res = BotCommand::botList();
+                    if (is_string($res)) {
+                        $this->showRed($res);
+                        return;
+                    }
+                    $table = $res['table'];
+                    if (count($table) == 1) {
+                        $this->plugin = $table[key($table)]['plugin'] ?? '';
+                    }
+                }
                 $this->callConsole("Debug");
                 break;
             case "help":

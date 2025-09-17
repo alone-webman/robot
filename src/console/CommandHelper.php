@@ -118,10 +118,6 @@ EOF;
                 // 添加插件
                 $this->add();
                 break;
-            case "set":
-                // 设置插件
-                $this->set();
-                break;
             case "list":
                 // 插件列表
                 $this->list();
@@ -133,8 +129,9 @@ EOF;
                 // 命令帮助
                 $this->help();
                 break;
+            case "set":
             default:
-                // 命令帮助
+                // 设置插件
                 $this->set();
                 break;
         }

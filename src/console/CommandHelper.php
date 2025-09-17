@@ -6,7 +6,6 @@ use AloneWebMan\RoBot\Cmd;
 use AlonePhp\Telegram\Bot;
 use AloneWebMan\RoBot\BotFacade;
 use AloneWebMan\RoBot\BotRequest;
-use AloneWebMan\RoBot\BotCommand;
 use Symfony\Component\Console\Helper\Table;
 use AloneWebMan\RoBot\console\trait\AddCommand;
 use AloneWebMan\RoBot\console\trait\SetCommand;
@@ -14,6 +13,7 @@ use AloneWebMan\RoBot\console\trait\getCommand;
 use AloneWebMan\RoBot\console\trait\CallCommand;
 use AloneWebMan\RoBot\console\trait\HelpCommand;
 use AloneWebMan\RoBot\console\trait\ListCommand;
+use AloneWebMan\RoBot\console\trait\DevCommand;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Helper\TableSeparator;
 
@@ -21,7 +21,7 @@ use Symfony\Component\Console\Helper\TableSeparator;
  * 命令执行入口
  */
 class CommandHelper {
-    use AddCommand, CallCommand, HelpCommand, ListCommand, SetCommand, getCommand;
+    use AddCommand, CallCommand, HelpCommand, ListCommand, SetCommand, getCommand, DevCommand;
 
     // 处理类型
     public string|null $type = null;
@@ -126,18 +126,7 @@ EOF;
                 $this->list();
                 break;
             case "dev":
-                if (empty($this->plugin)) {
-                    $res = BotCommand::botList();
-                    if (is_string($res)) {
-                        $this->showRed($res);
-                        return;
-                    }
-                    $table = $res['table'];
-                    if (count($table) == 1) {
-                        $this->plugin = $table[key($table)]['plugin'] ?? '';
-                    }
-                }
-                $this->callConsole("Debug");
+                $this->dev();
                 break;
             case "help":
             default:

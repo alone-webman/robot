@@ -203,6 +203,7 @@ class BotRequest {
             $this->fullName();
             if (str_starts_with($this->text, '/')) {
                 $this->command = substr($this->text, 1);
+                $this->command = str_contains($this->command, 'start@') ? "start" : $this->command;
                 $spacePos = strpos($this->command, ' ');
                 if ($spacePos !== false) {
                     $this->command_param = trim(substr($this->command, $spacePos + 1));

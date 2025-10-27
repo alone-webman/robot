@@ -79,7 +79,7 @@ class BotProcess {
      * @return bool|int
      */
     public static function setBotUpdateId(int $updateId, string $plugin, string $token, string $file, string $pull_key): bool|int {
-        ($pull_key) && Redis::set($pull_key . "_" . $plugin . "_" . $token . "_update_id", $updateId);
+        ($pull_key) && Redis::set($pull_key . ":" . $plugin . ":" . $token . "_update_id", $updateId);
         return @file_put_contents($file, $updateId);
     }
 
@@ -93,7 +93,7 @@ class BotProcess {
      */
     public static function getBotUpdateId(string $plugin, string $token, string $file, string $pull_key): int {
         if (!empty($pull_key)) {
-            $updateId = (Redis::get($pull_key . "_" . $plugin . "_" . $token . "_update_id")) ?: "";
+            $updateId = (Redis::get($pull_key . ":" . $plugin . ":" . $token . "_update_id")) ?: "";
             if (!empty($updateId)) {
                 return $updateId;
             }
@@ -178,7 +178,7 @@ class BotProcess {
             }
         }
         $json = json_encode($save);
-        ($pull_key) && Redis::set($pull_key . "_" . $plugin . "_bot", $json);
+        ($pull_key) && Redis::set($pull_key . ":" . $plugin . "_bot", $json);
         @file_put_contents($file, $json);
         return $save;
     }
@@ -192,7 +192,7 @@ class BotProcess {
      */
     public static function getBotCache(string $plugin, string $file, string $pull_key): array {
         if (!empty($pull_key)) {
-            $json = (Redis::get($pull_key . "_" . $plugin . "_bot")) ?: "";
+            $json = (Redis::get($pull_key . ":" . $plugin . "_bot")) ?: "";
             $items = BotWay::isJson($json);
             if (!empty($items)) {
                 return $items;

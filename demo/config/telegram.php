@@ -41,7 +41,7 @@ return [
     // 空闲进程等待时间
     "pull_wait"     => 30,
     // redis保存key名称
-    "pull_key"      => "alone_bot_%plugin%_pull_key",
+    "pull_key"      => "alone_bot:%plugin%:pull_key",
 
     /*
      * ==========================队列设置==========================
@@ -57,7 +57,7 @@ return [
     // 处理类,null为默认
     "queue_handler" => null,
     // 队列redis,key名称
-    "queue_key"     => "alone_bot_%plugin%_queue_message",
+    "queue_key"     => "alone_bot:%plugin%:queue_message",
 
     /*
      * ==========================异步设置==========================

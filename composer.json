@@ -21,7 +21,6 @@
     "alone-php/telegram":"dev-main",
     "alone-php/code":"dev-main",
     "alone-webman/model":"dev-main",
-    "alone-webman/redis":"dev-main",
     "webman/redis":"^2.1",
     "illuminate/events":"^10.48",
     "illuminate/pagination":"^10.48"

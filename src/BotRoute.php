@@ -5,6 +5,7 @@ namespace AloneWebMan\RoBot;
 use Exception;
 use Throwable;
 use Webman\Route;
+use support\Redis;
 use support\Request;
 use Workerman\Coroutine;
 use Workerman\Connection\AsyncTcpConnection;
@@ -109,7 +110,8 @@ class BotRoute {
     public static function queue(string $plugin, string $token, array $post): void {
         $config = BotFacade::config($plugin);
         if ($config['queue_status'] && $config['queue_key']) {
-            alone_redis_set($config['queue_key'] . "_" . $plugin . "_list", ['plugin' => $plugin, 'token' => $token, 'post' => $post]);
+            $data = json_encode(['plugin' => $plugin, 'token' => $token, 'post' => $post], JSON_UNESCAPED_UNICODE);
+            Redis::lPush($config['queue_key'] . "_" . $plugin . "_list", $data);
         } else {
             static::coroutine($plugin, $token, $post);
         }

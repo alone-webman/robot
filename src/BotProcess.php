@@ -5,6 +5,7 @@ namespace AloneWebMan\RoBot;
 
 use support\Redis;
 use Workerman\Events\Fiber;
+use Workerman\Events\Swoole;
 use AloneWebMan\RoBot\process\PullProcess;
 use AloneWebMan\RoBot\process\QueueProcess;
 use AloneWebMan\RoBot\process\AsyncProcess;
@@ -33,6 +34,7 @@ class BotProcess {
             ]
         ];
         */
+        $eventLoop = (extension_loaded('swoole') && class_exists('Swoole\Coroutine')) ? Swoole::class : Fiber::class;
         $process = [];
         $config = BotFacade::config($plugin);
         if ($config['pull_status']) {
@@ -41,7 +43,7 @@ class BotProcess {
                 $pull_handler = $config["pull_handler"] ?? null;
                 $process['pull'] = [
                     "name"      => $plugin,
-                    'eventLoop' => Fiber::class,
+                    'eventLoop' => $eventLoop,
                     'handler'   => !empty($pull_handler) ? $pull_handler : PullProcess::class,
                     'count'     => $pull_count
                 ];
@@ -51,7 +53,7 @@ class BotProcess {
             $queue_handler = $config["queue_handler"] ?? null;
             $process['queue'] = [
                 "name"      => $plugin,
-                'eventLoop' => Fiber::class,
+                'eventLoop' => $eventLoop,
                 'handler'   => !empty($queue_handler) ? $queue_handler : QueueProcess::class,
                 'count'     => $config['queue_count']
             ];
@@ -60,7 +62,7 @@ class BotProcess {
             $async_handler = $config["async_handler"] ?? null;
             $process['async'] = [
                 "name"      => $plugin,
-                'eventLoop' => Fiber::class,
+                'eventLoop' => $eventLoop,
                 "handler"   => !empty($async_handler) ? $async_handler : AsyncProcess::class,
                 'listen'    => $config['async_listen'],
                 'count'     => $config['async_count']

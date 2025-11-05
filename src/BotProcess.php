@@ -17,9 +17,10 @@ class BotProcess {
     /**
      * 自定进程
      * @param string $plugin
+     * @param bool   $swoole
      * @return array
      */
-    public static function start(string $plugin): array {
+    public static function start(string $plugin, bool $swoole = false): array {
         /*
         $process['monitor'] = [
             'handler'     => \app\process\Monitor::class,
@@ -34,7 +35,7 @@ class BotProcess {
             ]
         ];
         */
-        $eventLoop = (extension_loaded('swoole') && class_exists('Swoole\Coroutine')) ? Swoole::class : Fiber::class;
+        $eventLoop = ($swoole && extension_loaded('swoole') && class_exists('Swoole\Coroutine')) ? Swoole::class : Fiber::class;
         $process = [];
         $config = BotFacade::config($plugin);
         if ($config['pull_status']) {

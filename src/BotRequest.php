@@ -49,6 +49,10 @@ class BotRequest {
     public string|int $query_game = "";
     // 回调data
     public string|int $query_data = "";
+    // 内联id
+    public string|int $inline_id = "";
+    // 内联数据
+    public string|int $inline_data = "";
     // 新入员入群
     public bool $group_new = false;
     // 信息来源是否机器人
@@ -275,7 +279,19 @@ class BotRequest {
      * 内联查询
      * @return void
      */
-    protected function inline_query(): void {}
+    protected function inline_query(): void {
+        // 内联data
+        $this->inline_data = $this->data['query'] ?? '';
+        // 内联id
+        $this->inline_id = $this->data['id'] ?? '';
+        // 聊天类型
+        $this->chat_type = $this->data['chat_type'] ?? '';
+        $this->getFrom($this->data['from'] ?? []);
+        // 聊天类型变换
+        $this->chatType();
+        // 全名
+        $this->fullName();
+    }
 
     /**
      * 选择的内联结果

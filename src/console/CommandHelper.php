@@ -184,7 +184,7 @@ EOF;
      * @return Bot
      */
     public function res(): Bot {
-        return alone_bot($this->bot['key'], false);
+        return alone_bot($this->bot['key']);
     }
 
     /**

@@ -173,7 +173,7 @@ class BotRoute {
             ];
             $config = BotFacade::config($plugin);
             if ($config["dev_status"]) {
-                alone_bot($config["dev_key"])->chat_id($config["dev_chat"])->sendMessage(BotWay::json($array));
+                alone_bot($config["dev_key"], false)->chat_id($config["dev_chat"])->sendMessage(BotWay::json($array));
             }
             BotFacade::callApi($plugin, "Error", $token, $post, $exception, $array);
         }

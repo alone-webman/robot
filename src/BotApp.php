@@ -83,7 +83,7 @@ abstract class BotApp {
      * @return Bot
      */
     public function bot(): Bot {
-        return alone_bot($this->key);
+        return alone_bot($this->key, false);
     }
 
     /**

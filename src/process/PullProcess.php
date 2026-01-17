@@ -45,7 +45,7 @@ class PullProcess {
                     if (!empty($item['key'])) {
                         $update_id_file = run_path('runtime/alone_bot/' . $plugin . '_' . $item['token'] . '_update_id.cache');
                         $update_id = BotProcess::getBotUpdateId($plugin, $item['token'], $update_id_file, $pull_key);
-                        $bot = alone_bot($item['key']);
+                        $bot = alone_bot($item['key'], false);
                         $bot->getUpdates($update_id, 100, 0, $item["updates"]);
                         $array = $bot->array();
                         $ok = ($array['ok'] ?? '');
